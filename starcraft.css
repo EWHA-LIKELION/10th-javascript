@@ -1,0 +1,31 @@
+.background {
+    position: relative;
+    background-image: url('background.png');
+    background-size: 500px 330px;
+    width: 500px;
+    height: 330px;
+}
+#drone {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 100px;
+    left: 60px;
+}
+#bunker {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 80px;
+    right: 70px;
+}
+#spit {
+    display: none;
+    /* 침이 발사되는 것은 click하면서 보여야하기 때문에 숨겨놓음 */
+    position: absolute;
+    top: 140px;
+    left: 150px;
+    width: 50px;
+    height: 30px;
+    z-index: 2;
+}

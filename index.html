@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p id='A'>저는 천재입니다</p>
+    <script>
+        document.getElementById('A').innerHTML ='뻥입니다';
+    </script> -->
+    <!-- <p>콘솔에 출력해보기</p>
+    <script>console.log("hello world");</script> -->
+    <script>
+    // let array = [3,10,2];
+    // array.sort();
+    // console.log(array);
+    // array.sort((a,b)=> a-b); 
+    // // 오름차순
+    // console.log(array);
+    // array.sort((a,b)=>b-a);
+    // // 내림차순
+    // console.log(array);
+    class Student{
+        constructor(name, age, enrolled, score){
+            this.name = name;
+            this.age = age;
+            this.enrolled = enrolled;
+            this.score = score;
+        }
+    }
+    const students = [
+        new Student('A', 29, true, 45),
+        new Student('B', 28, false, 80),
+        new Student('C', 30, true, 90),
+        new Student('D', 40, false, 66),
+        new Student('E', 18, true, 88),
+    ];
+    // const goodStudent = students.find((student) => student.score === 90);
+    // console.log(goodStudent);
+    // const res = students.filter((student) => student.enrolled);
+    // console.log(res);
+    // const pos = students.map((student) => student.score);
+    // console.log(pos);
+    // const res = students.map((student) => student.score).filter((score) => score >= 50).ioin();
+    // console.log(res);
+    // const log = students.map((student) => student.score).sort((a,b) => a-b).join();
+    // console.log(log);
+    </script>
+</body>
+</html>
