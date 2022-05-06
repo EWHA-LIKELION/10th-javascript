@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스 타 크 래 프 트</title>
+</head>
+<body>
+    <h1 id='hp'>HP: 3</h1>
+    <div class="background">
+        <img src="drone.png" alt="drone" id="drone">
+        <img src="spit.png" alt="spit" id="spit">
+        <img src="bunker.png" alt="bunker" id="bunker">
+    </div>
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+    <script>
+        let hp = 3;
+        $("#drone").click(function(){
+            $("#spit").fadeIn(); // 드론을 클릭하면 침이 나타남
+            $("#spit").animate({left: '+=250'}); // 침이 오른쪽으로 250만큼 이동함
+            $("#spit").fadeOut(function(){ // fadeout 이후에 hp가 깎이도록 함
+                hp -= 1;
+                $("#hp").text("HP: " + hp); // jQueary의 text 라이브러리 사용한다는 것
+                if( hp == 0){ // hp가 0이면 bunker를 fadeout
+                    $("#bunker").fadeOut();
+                }
+            });
+            $("#spit").css({left: '150px'}); //이동하는 것이 아니라 사라지는 것이라 animate 쓸 필요 x   
+        
+        });
+
+
+    </script>
+</body>
+</html>
