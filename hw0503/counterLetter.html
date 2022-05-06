@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자소서 글자수 계산기</title>
+</head>
+<body>
+    <h1>자기소개서</h1>
+    <!-- onkeydown; keyboard를 입력하면 js를 실행시키는 event handling -->
+    <textarea onkeydown="counter()" id="textArea" rows="7" cols="50" class="form_control">안녕하시렵니까</textarea>
+    <span id="count">(0/200)</span>
+    <script>
+
+        function counter() {
+            let content= document.getElementById("textArea").value;
+            if(content.length > 200){ // 200자가 넘어갈 경우 200자에서 자른다
+                content = content.substring(0,200);
+                document.getElementById("textArea").value = content;
+            }
+            document.getElementById("count").innerHTML = '(' + content.length + "/200)";
+        };
+
+        counter();
+    </script>
+</body>
+</html>
