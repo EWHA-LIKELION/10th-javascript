@@ -1,0 +1,23 @@
+article {
+    display: flex;
+    flex-direction: column;
+}
+
+.question{
+    display: none;
+}
+
+.result{
+    display: none;
+}
+
+#img {
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto; /*  가운데 배치 */
+}
+
+.share {
+    margin: 0 auto;
+}
