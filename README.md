@@ -1,3 +1,4 @@
+
 <h1> todo list 디자인
 <h3> 10기 곽은진
   
@@ -35,3 +36,6 @@
   
   ## 피그마 주소
   https://www.figma.com/file/FhILkQDsWLQNw0xAdEsjPt/0408-%EC%8A%A4%ED%84%B0%EB%94%94-1-_-todo-list?node-id=0%3A1
+=======
+## Javascript 실습
+
