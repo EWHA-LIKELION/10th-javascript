@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <!-- html에서 한글로 인식하게 en->ko로 바꾸기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="naver-site-verification" content="956e3c486cd3de1466910b2a7a2c539af2651d18" />
+    <title>MBTI</title>
+    <meta name="description" content="나에게 어울리는 디저트를 추천해주는 테스트입니다.">
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="디저트 MBTI 테스트">
+    <meta property="og:description" content="나에게 어울리는 디저트를 추천해주는 테스트입니다.">
+    <meta property="og:image" content="https://mbti-dessert.netlify.app//lion.jpg">
+    <meta property="og:url" content="https://mbti-dessert.netlify.app/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="mbti.css">
+</head>
+<body class="container">
+    <!-- class container 주면 자동으로 마진 적용됨  -->
+    <article class="start">       
+        <h1 class="mt-5 text-center">나에게 어울리는 디저트는?</h1>
+        <!-- bootstrap 이용, class명에 적기 margin top 5, center 정렬 -->
+        <button type="button" class="btn btn-primary mt-5" onclick="start();">테스트 시작하기</button>
+    </article>
+    <article class="question">
+        <div class="progress mt-5">
+            <div class="progress-bar" role="progressbar" style="width: calc(100/12*1%)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <!-- style tag는 css문법 사용, calc() 괄호 안의 계산식 자동으로 반영 -->
+        <!-- 문제 넘어갈 때 width 수식 변경하기  -->
+        </div>
+        <h2 id="title" class="text-center mt-5">문제</h2>
+        <input id="type" type="hidden" value="EI">
+        <button id="A" type="button" class="btn btn-primary mt-5">A</button>
+        <button id="B" type="button" class="btn btn-primary mt-5">B</button>
+    </article>
+    <article class="result">
+        <img id="dessert-img" class="rounded-circle mt-5" src="tart.png" alt="dessert">
+        <h2 id="dessert" class="text-center mt-5">디저트 이름</h2>
+        <h3 id="explain" class="text-center mt-5">설명</h3>
+        <div id="share" class="addthis_inline_share_toolbox mt-5"></div>
+    </article>
+    <input type="hidden" id="EI" value="0"> 
+    <input type="hidden" id="SN" value="0"> 
+    <input type="hidden" id="TF" value="0"> 
+    <input type="hidden" id="JP" value="0"> 
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        var num = 1;
+        var q = {
+            1: {"title": "문제 1번", "type":"EI","A":"E","B":"I"},
+            2: {"title": "문제 2번", "type":"EI","A":"E","B":"I"},
+            3: {"title": "문제 3번", "type":"EI","A":"E","B":"I"},
+            4: {"title": "문제 4번", "type":"SN","A":"S","B":"N"},
+            5: {"title": "문제 5번", "type":"SN","A":"S","B":"N"},
+            6: {"title": "문제 6번", "type":"SN","A":"S","B":"N"},
+            7: {"title": "문제 7번", "type":"TF","A":"T","B":"F"},
+            8: {"title": "문제 8번", "type":"TF","A":"T","B":"F"},
+            9: {"title": "문제 9번", "type":"TF","A":"T","B":"F"},
+            10: {"title": "문제 10번", "type":"JP","A":"J","B":"P"},
+            11: {"title": "문제 11번", "type":"JP","A":"J","B":"P"},
+            12: {"title": "문제 12번", "type":"JP","A":"J","B":"P"}
+        }
+        var result = {
+            "ESTJ": {"dessert":"티라미수","explain":"티라미수 설명","img":"tiramisu.png"},
+            "ESTP": {"dessert":"마카롱","explain":"마카롱 설명","img":"macaron.png"},
+            "ESFJ": {"dessert":"브라우니","explain":"브라우니 설명","img":"brownie.png"},
+            "ESFP": {"dessert":"컵케이크","explain":"컵케이크 설명","img":"cupcake.png"},
+            "ENTJ": {"dessert":"라즈베리 타르트","explain":"라즈베리 타르트 설명","img":"tart.png"},
+            "ENTP": {"dessert":"아이스크림","explain":"아이스크림 설명","img":"icecream.png"},
+            "ENFJ": {"dessert":"초코칩 쿠키","explain":"초코칩 쿠키 설명","img":"cookie.png"},
+            "ENFP": {"dessert":"츄러스","explain":"츄러스 설명","img":" churros.png"},
+        }
+        function start(){
+            $(".start").hide();//클릭하면 시작화면이 사라짐 
+            $(".question").show();//클릭하면 문제화면 보이게 함 
+            next();//시작화면에서 바로 1번으로 넘어가게끔
+            }
+            $("#A").click(function(){
+                //A버튼 눌렀을 때 점수 증가하게함
+                var type = $("#type").val(); //id가 type것의 값을 불러옴 
+                var prevalue = $("#"+type).val(); 
+                $("#"+type).val(parseInt(prevalue)+1); //value 값으로 새로 증가된 점수 저장
+                next(); //A클릭하면 다음문제로 넘어가는 함수 실행
+            });
+            $("#B").click(function(){
+                next(); //B클릭하면 다음문제로 넘어가는 함수 실행
+            });
+        function next(){
+            if(num==13){
+                $(".question").hide();
+                $(".result").show();
+                var mbti = "";
+                ($("#EI").val() <2) ?  mbti += "I" :  mbti += "E";
+                ($("#SN").val() <2) ?  mbti += "N" :  mbti += "S";
+                ($("#TF").val() <2) ?  mbti += "F" :  mbti += "T";
+                ($("#JP").val() <2) ?  mbti += "P" :  mbti += "J";
+                alert(mbti);
+                $("#dessert-img").attr("src",result[mbti]["img"]);
+                $("#dessert").html(result[mbti]["dessert"]);
+                $("#explain").html(result[mbti]["explain"]);
+            }//mbti 결과 로직: 3항연산자 이용 ESTJ일때만 점수 증가하므로, 2점 미만인 경우 반대
+            else{
+                $(".progress-bar").attr("style","width: calc(100/12*"+num+"%)");//attr 태그 속성 바꾸는 함수
+                $("#title").html(q[num]["title"]); //문제 번호 바꾸기
+                $("#type").val(q[num]["type"]); //문제에서 type 값 불러오기
+                $("#A").html(q[num]["A"]);
+                $("#B").html(q[num]["B"]);
+                num++; //1번->2번->3번 문제 불러오기
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62793c092f44ae32"></script>
+    <div class="kakao_ad mt-5">
+        <ins class="kakao_ad_area" style="display:none;" 
+        data-ad-unit    = "DAN-aJ4hDPCiBXLqqBJC" 
+        data-ad-width   = "320" 
+        data-ad-height  = "100"></ins> 
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    <a class="banner mt-5" href="https://www.codelion.net/catalog/Q291cnNlTm9kZTpqbW9r?utm_source=animal_test&utm_medium=web_lecture&utm_campaign=conjs1">
+        <img class="banner-img" src="banner.png" alt="banner">
+    </a>
+</div> 
+</body>
+</html>
